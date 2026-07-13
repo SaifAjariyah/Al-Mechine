@@ -1,0 +1,12 @@
+Record :
+- possible edge cases
+- why the code works in the way setup.
+- how else can the code be set up
+- why have you set it up in the way you have (advantages and disadvantages)
+
+The things to talk about:
+> Brain Kernal
+> Pixel Rendering 
+> Diffrence between OS and curernt system
+> Introduce what you hav built
+> Instead of AI try to find sources to rely on in building this porject

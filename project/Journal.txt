@@ -1,0 +1,42 @@
+Record changes and problem solving in this document
+Record the debuging process
+Record when you find out how and WHY something works (be it syntax or functions)
+
+---------------------------------------------------------------------------------------------------------------------------------
+Friday 10/07/2026
+
+what i want to ask and confrim from you is weather i should relocate the rendering logic from python to C. so far this is how i am rendering:
+
+i use pygame to specfiy the type of thing i want to render. say a square with some text inside of it "hello". and then this goes to my rendering function
+
+def pixel_print(canvas):
+    raw_24bit = bytearray(pygame.image.tobytes(canvas, "RGB"))
+    r = raw_24bit[0::3]
+    g = raw_24bit[1::3]
+    b = raw_24bit[2::3]
+
+    rgb565_data = array.array('H', (
+        ((red >> 3) << 11) | ((green >> 2) << 5) | (blue >> 3)
+        for red, green, blue in zip(r, g, b)
+    ))
+
+    try:
+        with open("/dev/fb1", "wb") as f:
+            f.write(rgb565_data.tobytes())
+    except IOError:
+        return False
+    return True
+
+
+the reason i am trying to move from python rendering to C rendering is that it is very slow currently. for example when i type it only updates 2 seconds after my input. which feels clanky and tiring after a while. i think the most logical approch is to just move the pixel rendering part from python to C of course. but i am not sure how much this will reflect on effenciy
+
+Hence, i will try to get mesruable data and compare both approches, and pick whichever is better. But to do this I will need a bigger testing samples, since what i have right now is not a very entensive task (i.e taking input and rendering it) i think i will have to test with an mp4 and record the frames per second. i also dont know the refresh rate of the tft screen so i will have toi search that
+
+todo:
+
+* rewrite python rendering logic in C
+* compare C and Python implementations 
+* use an mp4 file with a fps counter
+* show data collected visually
+
+---------------------------------------------------------------------------------------------------------------------------------
